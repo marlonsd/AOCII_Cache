@@ -88,9 +88,14 @@ print nsets, bsize, assoc, nomeArquivo
 
 cache = Cache(nsets, assoc)
 
-temp = open(nomeArquivo, 'r')
-dado = temp.read()
-temp.close()
+# temp = open(nomeArquivo, 'r') # Arquivo texto
+try:
+	temp = open(nomeArquivo, 'rb') # Arquivo binário
+	dado = temp.read()
+	temp.close()
+except IOError:
+	print "Erro ao abrir o arquivo ", nomeArquivo
+	sys.exit(1)
 
 
 vetor = leituraArquivo(dado)
