@@ -64,9 +64,9 @@ print nsets, bsize, assoc, nomeArquivo
 
 cache = Cache(nsets, assoc)
 
-# Arquivo texto
+# Abrindo arquivo Binário
 try:
-	op = open(nomeArquivo, 'rb') # Arquivo binário
+	op = open(nomeArquivo, 'rb')
 except IOError:
 	print "Erro ao abrir o arquivo ", nomeArquivo
 	sys.exit(1)
@@ -77,10 +77,11 @@ op.seek(0,2)
 tamanho = op.tell()
 op.seek(0)
 
+# Lendo o arquivo binário 
 while (op.tell() < tamanho):
-	r = op.read(4)
-	r = "".join("%02x" % ord(c) for c in r)
-	vetor += [int(r,16)]
+	r = op.read(4) # Leitura de um "int"
+	r = "".join("%02x" % ord(c) for c in r) # Conversão do ASCII para hexa
+	vetor += [int(r,16)] # Conversão de hexa para int
 
 nbits_offset = int(math.log(bsize, 2)); #Log2
 nbtis_indice = int(math.log(float(nsets/assoc), 2));
