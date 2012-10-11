@@ -16,30 +16,6 @@ from cache import Misses
 
 """ Funções """
 
-def leituraArquivo(dado):
-	i = 0
-	lista = []
-	string = ''
-	check = False
-
-	while(i < len(dado)):
-
-		if dado[i] >= '0' and dado[i] <= '9':
-			string += dado[i]
-			check = True
-		else:
-			if check:
-				check = False
-				lista += [int(string)]
-				string = ''
-
-		i += 1
-
-	if check:
-		lista += [int(string)]
-
-	return lista
-
 def checkAllValidade(cache, indice, assoc):
 	i = 0
 
@@ -88,19 +64,23 @@ print nsets, bsize, assoc, nomeArquivo
 
 cache = Cache(nsets, assoc)
 
-# temp = open(nomeArquivo, 'r') # Arquivo texto
+# Arquivo texto
 try:
-	temp = open(nomeArquivo, 'rb') # Arquivo binário
-	dado = temp.read()
-	temp.close()
+	op = open(nomeArquivo, 'rb') # Arquivo binário
 except IOError:
 	print "Erro ao abrir o arquivo ", nomeArquivo
 	sys.exit(1)
 
 
-vetor = leituraArquivo(dado)
+vetor = []
+op.seek(0,2)
+tamanho = op.tell()
+op.seek(0)
 
-#vetor = [4, 4, 5, 24, 30, 1, 2]
+while (op.tell() < tamanho):
+	r = op.read(4)
+	r = "".join("%02x" % ord(c) for c in r)
+	vetor += [int(r,16)]
 
 nbits_offset = int(math.log(bsize, 2)); #Log2
 nbtis_indice = int(math.log(float(nsets/assoc), 2));
@@ -109,8 +89,6 @@ miss = Misses()
 hit = 0
 
 print vetor
-
-#cache.printCache()
 
 for i in range (len(vetor)):
 	endereco = vetor[i]
@@ -142,7 +120,5 @@ for i in range (len(vetor)):
 			cache.setCache(tag, indice, chooseBloco(cache, indice, assoc))
 
 print
-print "Miss Compulsório: ", miss.getMissCompulsorio()
-print "Miss Capacidade: ", miss.getMissCapacidade()
-print "Miss Conflito: ", miss.getMissConflito()
+miss.printMiss()
 print "Hit: ", hit

@@ -1,7 +1,7 @@
 // ------------------------------------------------------------
 //  Trabalho Arquitetura e Organização de Computadores II
 //
-// Aluno: Marlon da Silva Dias
+// Aluno: Daniel Retzlaff, Marlon Dias
 // GitHub: https://github.com/marlonsd/AOCII_Cache
 // README
 // ------------------------------------------------------------
@@ -12,5 +12,5 @@ II do curso de Ciência da Computação da Universidade Federal de Pelotas.
 
 	Para executar o programa (no terminal): 
 	$ cache_simulator <nsets> <bsize> <assoc> arquivo_entrada
-	Onde o "arquivo_entrada" irá conter os valores de entrada
-	para o algoritmo tratar.
+	Onde o "arquivo_entrada" é um arquivo binário que irá conter os
+	valores de entrada para o algoritmo tratar.

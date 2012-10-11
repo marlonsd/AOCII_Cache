@@ -76,7 +76,6 @@ class Misses():
 		return self.conflito
 
 	def printMiss(self):
-		i = 0
 		print "Miss Compulsório: ", self.compulsorio
 		print "Miss Capacidade: ", self.capacidade
 		print "Miss Conflito: ", self.conflito
