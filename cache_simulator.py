@@ -83,6 +83,8 @@ while (op.tell() < tamanho):
 	r = "".join("%02x" % ord(c) for c in r) # Conversão do ASCII para hexa
 	vetor += [int(r,16)] # Conversão de hexa para int
 
+op.close()
+
 nbits_offset = int(math.log(bsize, 2)); #Log2
 nbtis_indice = int(math.log(float(nsets/assoc), 2));
 
